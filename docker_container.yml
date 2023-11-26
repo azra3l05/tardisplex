@@ -1,3 +1,7 @@
+
+-- Custom Containers for own Usage
+
+--eraserr setup code
 docker run -d \
     --name eraserr \
     --restart=unless-stopped \
@@ -33,7 +37,7 @@ docker run -d  \
   --label traefik.enable=false \
   ecsouthwick/eraserr
 
-
+--Gluetun config
 docker run -d -it --rm --name=gluetun01 --cap-add=NET_ADMIN -e VPN_SERVICE_PROVIDER=expressvpn \
 -e OPENVPN_USER=3mmbz661qf21tfxwjts3sv2u -e OPENVPN_PASSWORD=pk812lbb3z85u85xbvjpl5gp \
 qmcgaw/gluetun
