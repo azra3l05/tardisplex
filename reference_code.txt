@@ -1,0 +1,59 @@
+python3 media_manager.py --libraries "Movies - English" --select unwatched --date "2020-01-01" --action show
+
+python3 media_manager.py --libraries "TV Shows - Indian" --select unwatched --date "2022-01-01" --action show
+
+# rclone mergerfs
+
+/mnt/feeder=RW:/mnt/remote/dropboxcrypt=NC /mnt/unionfs
+
+# delete folder based on a list
+xargs -I{} echo rm -rf /mnt/google/Media/MoviesUHD/Movies\ -\ HDR/{} </home/azra3l/delete.txt
+
+# list folders based on size
+du -h --max-depth=1 | sort -hr | head -n 100
+
+# number of folders in a directory and its subdirectories
+find . -type d | wc -l
+
+find . -mindepth 1 -maxdepth 1 -type d | wc -l
+
+# tree for folders
+tree --du -h
+
+tree -d -L 2
+
+rsync -ah --progress source destination
+
+find . -type d -empty -print
+
+find . -type d -empty -delete
+
+######PLEX INSTANCE METADATA UPDATE
+create second plex instance
+claim it, give it a name
+shut both plex instances down
+move /opt/mynewplex to /opt/mynewplex.hidden
+copy /opt/plex to /opt/mynewplex
+copy /opt/mynewplex.hidden/Library/Application Support/Plex Media Server/Preferences.xml to /opt/mynewplex/Library/Application Support/Plex Media Server/Preferences.xml
+restart both plex
+verify that mynewplex has the same libraries as plex
+delete /opt/mynewplex.hidden
+
+find "/opt/plex/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -name "*.jpg" -type f -mtime +5 -delete
+
+find "/opt/plexalt/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -name "*.jpg" -type f -mtime +5 -delete
+
+find "/opt/moflix/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -name "*.jpg" -type f -mtime +5 -delete
+
+find "/opt/plexasaurus/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -name "*.jpg" -type f -mtime +5 -delete
+
+###Authelia Setup
+docker run --rm -v '/opt/authelia:/config' authelia/authelia:latest authelia hash-password 'M0hit@123' | sed -n 's/^Password hash: //p'
+
+https://www.authelia.com/reference/guides/passwords/#yaml-format
+
+docker ps --format '{{.Names}}'
+
+docker ps -a -f status=exited
+
+docker logs -f --tail 100 eraserr
