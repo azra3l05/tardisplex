@@ -1,0 +1,44 @@
+docker run -d \
+    --name eraserr \
+    --restart=unless-stopped \
+    -e PGID=1000 -e PUID=1000 \
+    --network=saltbox \
+    --network-alias=eraserr \
+    -v /opt/eraserr/config.json:/app/config.json \
+    -v /etc/localtime:/etc/localtime:ro \
+    --label com.github.saltbox.saltbox_managed=true \
+    --label traefik.enable=true \
+    --label traefik.http.routers.eraserr-http.entrypoints=web \
+    --label traefik.http.routers.eraserr-http.middlewares=globalHeaders@file,redirect-to-https,gzip \
+    --label traefik.http.routers.eraserr-http.rule=Host\(\'eraserr.alpha.tardisonline.in\'\) \
+    --label traefik.http.routers.eraserr-http.service=eraserr \
+    --label traefik.http.routers.eraserr.entrypoints=websecure \
+    --label traefik.http.routers.eraserr.middlewares=globalHeaders@file,secureHeaders@file \
+    --label traefik.http.routers.eraserr.rule=Host\(\'eraserr.alpha.tardisonline.in\'\) \
+    --label traefik.http.routers.eraserr.service=eraserr \
+    --label traefik.http.routers.eraserr.tls.certresolver=cfdns \
+    --label traefik.http.routers.eraserr.tls.options=securetls@file \
+    --label traefik.http.services.eraserr.loadbalancer.server.port=32400 \
+    ecsouthwick/eraserr
+
+
+docker run -d  \
+  --name=eraserr  \
+  --restart=unless-stopped  \
+  -e PGID=1000 -e PUID=1000  \
+  -v /opt/eraserr/config.json:/app/config.json \
+  --network=saltbox \
+  --network-alias=eraserr  \
+  --label com.github.saltbox.saltbox_managed=true \
+  --label traefik.enable=false \
+  ecsouthwick/eraserr
+
+
+docker run -d -it --rm --name=gluetun01 --cap-add=NET_ADMIN -e VPN_SERVICE_PROVIDER=expressvpn \
+-e OPENVPN_USER=3mmbz661qf21tfxwjts3sv2u -e OPENVPN_PASSWORD=pk812lbb3z85u85xbvjpl5gp \
+qmcgaw/gluetun
+
+
+ssh -L localhost:32400:gluetun01:32400 azra3l@116.202.218.240 -p 5765
+
+ssh azra3l@116.202.218.240 -p 5765 -L 32400:localhost:32400
