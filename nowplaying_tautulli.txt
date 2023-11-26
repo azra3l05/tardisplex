@@ -1,0 +1,61 @@
+{
+    "embeds": [
+        {
+            <episode>"color": 16556313,</episode><movie>"color": 10040012,</movie>
+            "fields": [
+            	{
+                    "inline": true,
+                    "name": "Source Quality",
+                    "value": "{video_full_resolution!u} / {audio_codec} {audio_channels}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Streaming Quality",
+                    "value": "{stream_video_resolution!u} / {stream_audio_codec} {stream_audio_channels}"
+            	},<show>{
+                    "inline": true,
+                    "name": "Show",
+                    "value": "{show_name}"
+                },</show>
+               	<episode>{
+                    "inline": true,
+                    "name": "Season/Episode",
+                    "value": "S**{season_num00}**E**{episode_num00}**"
+                },</episode>
+                 <movie>{
+                    "inline": true,
+                    "name": "Rating",
+                    "value": "🍿{rating}"
+                },</movie>
+                {
+                    "inline": true,
+                    "name": "Stream Type",
+                    "value": "{transcode_decision}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Details",
+                    "value": "<show>[Show Info]({thetvdb_url})</show><episode>[Series Info]({themoviedb_url})</episode><season>[Season Info]({themoviedb_url})</season><movie>[IMDb Info]({imdb_url})</movie>"
+                },
+                {
+                    "inline": true,
+                    "name": "Watch Now",
+                    "value": "[Plex Web]({plex_url})"
+                }
+            ],
+            "thumbnail": {
+                "url": "{poster_url}"
+            },
+            "title": "{title}<movie> ({year})</movie>",
+            "description": "{summary}",
+            "timestamp": "{utctime}",
+            "url": "{plex_url}",
+            "footer": {
+                "text": "{server_name} | {platform} | {video_decision!c} | {session_key} | {stream_audio_channels}"
+            }
+            
+        }
+       
+    ],
+    "username": "{user}"
+}
