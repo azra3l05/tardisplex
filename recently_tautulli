@@ -1,0 +1,72 @@
+{
+    "embeds": [
+        {
+            <episode>"color": 16556313,</episode><season>"color": 16772426,</season><show>"color": 5095605,</show><movie>"color": 10040012,</movie>
+            "fields": [
+            	{
+                    "inline": true,
+                    "name": "Media Type",
+                    "value": "{media_type!c}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Source Video Quality",
+                    "value": "{video_full_resolution!u}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Codec",
+                    "value": "{video_codec!u} / {audio_codec!u}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Language",
+                    "value": "{audio_language}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Subtitles",
+                    "value": "{subtitle_language}"
+            	},
+                {
+                    "inline": true,
+                    "name": "Size",
+                    "value": "{file_size}"
+            	},
+               	<episode>{
+                    "inline": true,
+                    "name": "Season/Episode",
+                    "value": "S**{season_num00}**E**{episode_num00}**"
+                },</episode>
+                 <movie>{
+                    "inline": true,
+                    "name": "Rating",
+                    "value": "{critic_rating} / 🍿{audience_rating}"
+                },</movie>
+                {
+                    "inline": true,
+                    "name": "Details",
+                    "value": "<show>[Show Info]({thetvdb_url})</show><episode>[Series Info]({themoviedb_url})</episode><season>[Season Info]({themoviedb_url})</season><movie>[IMDb Info]({imdb_url})</movie>"
+                },
+                {
+                    "inline": true,
+                    "name": "Watch Now",
+                    "value": "[Plex Web]({plex_url})"
+                }
+            ],
+            "thumbnail": {
+                "url": "{poster_url}"
+            },
+            "title": "{title}<movie> ({year})</movie>",
+            "description": "{summary}",
+            "timestamp": "{utctime}",
+            "url": "{plex_url}",
+            "footer": {
+                "text": "{studio} | {year} | {content_rating} | {stream_audio_channels} | {collections}"
+            }
+            
+        }
+       
+    ],
+    "username": "Library Updates"
+}
