@@ -46,3 +46,27 @@ qmcgaw/gluetun
 ssh -L localhost:32400:gluetun01:32400 azra3l@116.202.218.240 -p 5765
 
 ssh azra3l@116.202.218.240 -p 5765 -L 32400:localhost:32400
+
+
+docker run -d \
+    --name maintainerr \
+    --restart=unless-stopped \
+    -e PGID=1000 -e PUID=1000 \
+    --network=saltbox \
+    --network-alias=maintainerr \
+    -v /opt/maintainerr/:/opt/data \
+    -v /etc/localtime:/etc/localtime:ro \
+    --label com.github.saltbox.saltbox_managed=true \
+    --label traefik.enable=true \
+    --label traefik.http.routers.maintainerr-http.entrypoints=web \
+    --label traefik.http.routers.maintainerr-http.middlewares=globalHeaders@file,redirect-to-https,gzip \
+    --label traefik.http.routers.maintainerr-http.rule=Host\(\'maintainerr.alpha.tardisonline.in\'\) \
+    --label traefik.http.routers.maintainerr-http.service=maintainerr \
+    --label traefik.http.routers.maintainerr.entrypoints=websecure \
+    --label traefik.http.routers.maintainerr.middlewares=globalHeaders@file,secureHeaders@file \
+    --label traefik.http.routers.maintainerr.rule=Host\(\'maintainerr.alpha.tardisonline.in\'\) \
+    --label traefik.http.routers.maintainerr.service=maintainerr \
+    --label traefik.http.routers.maintainerr.tls.certresolver=cfdns \
+    --label traefik.http.routers.maintainerr.tls.options=securetls@file \
+    --label traefik.http.services.maintainerr.loadbalancer.server.port=80 \
+    jorenn92/maintainerr
