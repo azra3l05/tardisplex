@@ -1,0 +1,33 @@
+services:
+  dashy:
+    restart: unless-stopped 
+    container_name: dashy 
+    image: lissy93/dashy
+    hostname: dashy 
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    networks: 
+      - saltbox
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.dashy-http.entrypoints: web 
+      traefik.http.routers.dashy-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.dashy-http.rule: Host(`dashy.tardisonline.in`) 
+      traefik.http.routers.dashy-http.service: dashy 
+      traefik.http.routers.dashy.entrypoints: websecure 
+      traefik.http.routers.dashy.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.dashy.rule: Host(`dashy.tardisonline.in`) 
+      traefik.http.routers.dashy.service: dashy 
+      traefik.http.routers.dashy.tls.certresolver: cfdns 
+      traefik.http.routers.dashy.tls.options: securetls@file 
+      traefik.http.services.dashy.loadbalancer.server.port: 8080 
+    volumes: 
+      - /opt/dashy:/CONFIG
+      - /etc/localtime:/etc/localtime:ro
+
+networks: 
+  saltbox:
+    external: true

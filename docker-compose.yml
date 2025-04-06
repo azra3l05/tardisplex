@@ -1,0 +1,51 @@
+version: "3"
+services:
+  jellystat-db:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: 'jfstat'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+    - /postgres-data:/var/lib/postgresql/data # Mounting the volume
+  jellystat:
+    restart: unless-stopped 
+    container_name: jellystat 
+    image: cyfershepard/jellystat:latest
+    hostname: jellystat 
+    environment: 
+      PUID: 1000
+      PGID: 1000
+      TZ: Etc/UTC
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_IP: jellystat-db
+      POSTGRES_PORT: 5432
+      JWT_SECRET: 'my-secret-jwt-key'
+    networks: 
+      - saltbox
+    ports:
+      - "3000:3000" #Server Port
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.jellystat-http.entrypoints: web 
+      traefik.http.routers.jellystat-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.jellystat-http.rule: Host(`jellystat.tardisonline.in`) 
+      traefik.http.routers.jellystat-http.service: jellystat 
+      traefik.http.routers.jellystat.entrypoints: websecure 
+      traefik.http.routers.jellystat.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.jellystat.rule: Host(`jellystat.tardisonline.in`) 
+      traefik.http.routers.jellystat.service: jellystat 
+      traefik.http.routers.jellystat.tls.certresolver: cfdns 
+      traefik.http.routers.jellystat.tls.options: securetls@file 
+      traefik.http.services.jellystat.loadbalancer.server.port: 3000 
+    volumes: 
+      - /opt/jellystat:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/jellystat/backup-data:/app/backend/backup-data # Mounting the volume
+    depends_on:
+      - jellystat-db
+networks: 
+  saltbox:
+    external: true

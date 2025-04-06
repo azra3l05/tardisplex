@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheArchive Wiki</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #0D0D0D; /* Abyss Black */
+            color: #228B22; /* Forest Green */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #154B16, #228B22);
+            color: #FFFFFF;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1A1A1A; /* Slightly lighter black */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+        }
+        h1, h2, h3 {
+            color: #7FFF00; /* Chartreuse Green for Headings */
+        }
+        a {
+            color: #32CD32; /* Lime Green */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #0D260D; /* Deep Green */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        table th, table td {
+            border: 1px solid #228B22; /* Forest Green Border */
+            padding: 10px;
+            text-align: left;
+            color: #7FFF00; /* Chartreuse Green */
+        }
+        table th {
+            background-color: #154B16; /* Dark Forest Green */
+            font-weight: bold;
+        }
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #154B16, #228B22);
+            color: #FFFFFF;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section ul li {
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Welcome to TheArchive Wiki
+    </header>
+    <!-- <div id="root"><page locale="en" path="Plex" title="Plex" description="Plex Media Server" :tags="[{&quot;tag&quot;:&quot;plex&quot;,&quot;title&quot;:&quot;plex&quot;},{&quot;tag&quot;:&quot;media server&quot;,&quot;title&quot;:&quot;media server&quot;},{&quot;tag&quot;:&quot;server&quot;,&quot;title&quot;:&quot;server&quot;}]" created-at="2020-05-12T09:17:06.811Z" updated-at="2024-03-31T03:08:28.512Z" author-name="Administrator" :author-id="1" editor="ckeditor" :is-published="true" toc="W10=" :page-id="2" sidebar="W3siaSI6InNkaS0xIiwiayI6ImhlYWRlciIsImwiOiJKZWxseWZpbiIsImMiOm51bGwsInkiOm51bGwsInQiOm51bGx9LHsiaSI6InNkaS0yIiwiayI6ImRpdmlkZXIiLCJsIjpudWxsLCJjIjpudWxsLCJ5IjpudWxsLCJ0IjpudWxsfSx7ImkiOiJzZGktMyIsImsiOiJsaW5rIiwibCI6IkplbGx5ZmluIiwiYyI6ImZhLXNlcnZlciIsInkiOiJwYWdlIiwidCI6Ii9lbi9qZWxseWZpbiJ9LHsiaSI6InNkaS00IiwiayI6ImxpbmsiLCJsIjoiSmVsbHlmaW4gSW5pdGlhbCBTZXR0aW5ncyIsImMiOiJmYS1jb2dzIiwieSI6InBhZ2UiLCJ0IjoiL2VuL2plbGx5ZmluL2luaXRpYWxzZXR0aW5ncyJ9LHsiaSI6InNkaS01IiwiayI6ImRpdmlkZXIiLCJsIjpudWxsLCJjIjpudWxsLCJ5IjpudWxsLCJ0IjpudWxsfSx7ImkiOiJzZGktNiIsImsiOiJkaXZpZGVyIn0seyJpIjoic2RpLTciLCJrIjoiaGVhZGVyIiwibCI6IlBsZXggSW5mbyIsImMiOm51bGwsInkiOm51bGwsInQiOm51bGx9LHsiaSI6InNkaS04IiwiayI6ImxpbmsiLCJsIjoiSG9tZSIsImMiOiJtZGktaG9tZSIsInkiOiJwYWdlIiwidCI6Ii9lbi9QbGV4In0seyJpIjoic2RpLTkiLCJrIjoibGluayIsImwiOiJBY2NlcHQgUGxleCBJbnZpdGF0aW9uIiwiYyI6ImZhLWhhbmRzaGFrZS1vIiwieSI6InBhZ2UiLCJ0IjoiL2VuL1BsZXgvUGxleC1JbnZpdGUifSx7ImkiOiJzZGktMTAiLCJrIjoibGluayIsImwiOiJQbGV4IFByaXZhY3kgU2V0dGluZ3MiLCJjIjoiZmEtbG9jayIsInkiOiJwYWdlIiwidCI6Ii9lbi9QbGV4L0Rpc2FibGUtRGlzY292ZXItVG9nZXRoZXIifSx7ImkiOiJzZGktMTEiLCJrIjoiZGl2aWRlciIsImwiOm51bGwsImMiOm51bGwsInkiOm51bGwsInQiOm51bGx9LHsiaSI6InNkaS0xMiIsImsiOiJoZWFkZXIiLCJsIjoiUGxleCBDbGllbnRzIiwiYyI6bnVsbCwieSI6bnVsbCwidCI6bnVsbH0seyJpIjoic2RpLTEzIiwiayI6ImxpbmsiLCJsIjoiQW1hem9uIEZpcmVUViIsImMiOiJmYS1hbWF6b24iLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9BbWF6b25GaXJlIn0seyJpIjoic2RpLTE0IiwiayI6ImxpbmsiLCJsIjoiQW5kcm9pZCBUViIsImMiOiJmYS1hbmRyb2lkIiwieSI6InBhZ2UiLCJ0IjoiL2VuL1BsZXgvQW5kcm9pZFRWIn0seyJpIjoic2RpLTE1IiwiayI6ImxpbmsiLCJsIjoiQXBwbGVUViIsImMiOiJmYS1hcHBsZSIsInkiOiJwYWdlIiwidCI6Ii9lbi9QbGV4L0FwcGxlVFYifSx7ImkiOiJzZGktMTYiLCJrIjoibGluayIsImwiOiJLb2RpIiwiYyI6ImZhLXBsdWciLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9Lb2RpIn0seyJpIjoic2RpLTE3IiwiayI6ImxpbmsiLCJsIjoiTEcgLyB3ZWJPUyIsImMiOiJmYS10diIsInkiOiJwYWdlIiwidCI6Ii9lbi9QbGV4L0xHd2ViT1MifSx7ImkiOiJzZGktMTgiLCJrIjoibGluayIsImwiOiJQbGF5c3RhdGlvbiIsImMiOiJmYS1nYW1lcGFkIiwieSI6InBhZ2UiLCJ0IjoiL2VuL1BsZXgvUGxheXN0YXRpb24ifSx7ImkiOiJzZGktMTkiLCJrIjoibGluayIsImwiOiJQbGV4IFdlYiBQbGF5ZXIiLCJjIjoiZmEtcGxheSIsInkiOiJwYWdlIiwidCI6Ii9lbi9QbGV4L3BsZXh3ZWIifSx7ImkiOiJzZGktMjAiLCJrIjoibGluayIsImwiOiJSb2t1IiwiYyI6ImZhLXJlZ2lzdGVyZWQiLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9Sb2t1In0seyJpIjoic2RpLTIxIiwiayI6ImxpbmsiLCJsIjoiV2luZG93cyAvIE1hYyBhcHAiLCJjIjoiZmEtZG9sbGFyIiwieSI6InBhZ2UiLCJ0IjoiL2VuL1BsZXgvd2luZG93cy1tYWNhcHAifSx7ImkiOiJzZGktMjIiLCJrIjoibGluayIsImwiOiJYYm94IiwiYyI6ImZhLXdpbmRvd3MiLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9YYm94In0seyJpIjoic2RpLTIzIiwiayI6ImRpdmlkZXIiLCJsIjpudWxsLCJjIjpudWxsLCJ5IjpudWxsLCJ0IjpudWxsfSx7ImkiOiJzZGktMjQiLCJrIjoiaGVhZGVyIiwibCI6Ik1vYmlsZSBEZXZpY2VzIiwiYyI6bnVsbCwieSI6bnVsbCwidCI6bnVsbH0seyJpIjoic2RpLTI1IiwiayI6ImxpbmsiLCJsIjoiQW5kcm9pZCBEZXZpY2VzIiwiYyI6ImZhLWFuZHJvaWQiLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9BbmRyb2lkTW9iaWxlIn0seyJpIjoic2RpLTI2IiwiayI6ImxpbmsiLCJsIjoiQXBwbGUgSU9TIERldmljZXMiLCJjIjoiZmEtYXBwbGUiLCJ5IjoicGFnZSIsInQiOiIvZW4vUGxleC9pb3MifSx7ImkiOiJzZGktMjciLCJrIjoiZGl2aWRlciIsImwiOm51bGwsImMiOm51bGwsInkiOm51bGwsInQiOm51bGx9LHsiaSI6InNkaS0yOCIsImsiOiJkaXZpZGVyIiwibCI6bnVsbCwiYyI6bnVsbCwieSI6bnVsbCwidCI6bnVsbH0seyJpIjoic2RpLTI5IiwiayI6ImxpbmsiLCJsIjoiZW1ieSIsImMiOiJmYS1zZXJ2ZXIiLCJ5IjoicGFnZSIsInQiOiIvZW4vZW1ieS9ob21lIn1d" nav-mode="MIXED" effective-permissions="eyJjb21tZW50cyI6eyJyZWFkIjpmYWxzZSwid3JpdGUiOmZhbHNlLCJtYW5hZ2UiOmZhbHNlfSwiaGlzdG9yeSI6eyJyZWFkIjpmYWxzZX0sInNvdXJjZSI6eyJyZWFkIjpmYWxzZX0sInBhZ2VzIjp7InJlYWQiOnRydWUsIndyaXRlIjpmYWxzZSwibWFuYWdlIjpmYWxzZSwiZGVsZXRlIjpmYWxzZSwic2NyaXB0IjpmYWxzZSwic3R5bGUiOmZhbHNlfSwic3lzdGVtIjp7Im1hbmFnZSI6ZmFsc2V9fQ==" edit-shortcuts="eyJlZGl0RmFiIjp0cnVlLCJlZGl0TWVudUJhciI6ZmFsc2UsImVkaXRNZW51QnRuIjp0cnVlLCJlZGl0TWVudUV4dGVybmFsQnRuIjp0cnVlLCJlZGl0TWVudUV4dGVybmFsTmFtZSI6IkdpdEh1YiIsImVkaXRNZW51RXh0ZXJuYWxJY29uIjoibWRpLWdpdGh1YiIsImVkaXRNZW51RXh0ZXJuYWxVcmwiOiJodHRwczovL2dpdGh1Yi5jb20vb3JnL3JlcG8vYmxvYi9tYWluL3tmaWxlbmFtZX0ifQ==" filename="Plex.html"><template slot="contents"><div><figure class="image"><img src="/logos/plexlogo_2023-04-23_10-39-52.png">
+      <figcaption><i>Plex, the Plex Play logo and Plex Media Server are trademarks of </i><a class="is-external-link" href="https://www.plex.tv/"><i>Plex</i></a><i> and used under a </i><a class="is-external-link" href="https://www.plex.tv/about/privacy-legal/plex-trademarks-and-guidelines/"><i>license</i></a><i>.</i></figcaption>
+    </figure> -->
+    <main>
+        <section class="server_overview">
+            <h2>Server Overview</h2>
+            <h3>Hardware Configuration</h3>
+            <ul>
+                <li><strong>Processor:</strong> AMD EPYC 7502P</li>
+                <li><strong>RAM:</strong> 256GB</li>
+                <li><strong>Storage:</strong> 300TB</li>
+                <li><strong>Architecture:</strong> Dockerized Container Setup</li>
+            </ul>
+        </section>
+
+        <section class="plex">
+            <h2>Sign Up for Plex</h2>
+            <ul>
+                <li>Visit the Plex website at <a href="https://www.plex.tv" target="_blank">plex.tv</a> and create an account.</li>
+                <li>Contact the admin to receive access to TheArchive's Plex server. Provide your Plex account email for whitelisting.</li>
+                <li>Once approved, log in to Plex and access TheArchive's library under "Shared Libraries."</li>
+            </ul>
+            <h3 class="toc-header" id="streaming-clients"><a href="#streaming-clients" class="toc-anchor">¶</a> Streaming Clients:</h3>
+            <ul>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/AmazonFire">Amazon FireTV</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/AndroidTV">Android TV</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/AppleTV">AppleTV</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/Kodi">Kodi</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/LGwebOS">LG/webOS</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/Playstation">Playstation</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/plexweb">Plex Web Player</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/Roku">Roku</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/windows-macapp">Windows/MAC app</a></li>
+                <li><a class="is-internal-link is-valid-page" href="/en/Plex/Xbox">Xbox</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Setting Up Your Devices for Plex</h2>
+            <h3>Supported Devices</h3>
+            <ul>
+                <li>Smart TVs with Plex app support.</li>
+                <li>Streaming devices like Roku, Apple TV, Amazon Fire Stick, and Chromecast.</li>
+                <li>Mobile devices running iOS or Android.</li>
+                <li>Desktop and laptop computers via the Plex Web app.</li>
+            </ul>
+
+            <h3>Steps to Set Up Plex</h3>
+            <ul>
+                <li>Download and install the Plex app on your preferred device.</li>
+                <li>Log in to your Plex account.</li>
+                <li>Navigate to "Shared Libraries" and select TheArchive server.</li>
+                <li>Browse and enjoy your media collection!</li>
+            </ul>
+
+            <h3>Tips for Optimal Performance</h3>
+            <ul>
+                <li>Ensure a stable internet connection for seamless streaming.</li>
+                <li>Enable hardware acceleration in the Plex app settings if supported by your device.</li>
+                <li>Update the Plex app regularly to access the latest features and improvements.</li>
+            </ul>
+        </section>
+
+        <section class="emby">
+            <h2>Sign Up for Emby</h2>
+            <ul>
+                <li>Visit the Emby website at <a href="https://emby.media" target="_blank">emby.media</a> and create an account.</li>
+                <li>Contact the admin to gain access to TheArchive's Emby server. Provide your Emby account email for whitelisting.</li>
+                <li>Once approved, log in to Emby and access TheArchive's library under "Shared Libraries."</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Setting Up Your Devices for Emby</h2>
+            <h3>Supported Devices</h3>
+            <ul>
+                <li>Smart TVs with Emby app support.</li>
+                <li>Streaming devices like Roku, Apple TV, Amazon Fire Stick, and Chromecast.</li>
+                <li>Mobile devices running iOS or Android.</li>
+                <li>Desktop and laptop computers via the Emby Web app.</li>
+            </ul>
+
+            <h3>Steps to Set Up Emby</h3>
+            <ul>
+                <li>Download and install the Emby app on your preferred device.</li>
+                <li>Log in to your Emby account.</li>
+                <li>Navigate to "Shared Libraries" and select TheArchive server.</li>
+                <li>Browse and enjoy your media collection!</li>
+            </ul>
+
+            <h3>Tips for Optimal Performance</h3>
+            <ul>
+                <li>Ensure a stable internet connection for seamless streaming.</li>
+                <li>Enable hardware acceleration in the Emby app settings if supported by your device.</li>
+                <li>Update the Emby app regularly to access the latest features and improvements.</li>
+            </ul>
+        </section>
+
+        <section class="overseerr">
+            <h2>Request Process through Overseerr</h2>
+            <ul>
+                <li>Log in to Overseerr at <a href="https://overseerr.tardisonline.in" target="_blank">overseerr.tardisonline.in</a>.</li>
+                <li>Search for the desired movie or TV show in the search bar.</li>
+                <li>If available, click on the "Request" button to add it to the request queue.</li>
+                <li>Wait for admin approval. Once approved, the content will be added to TheArchive library.</li>
+                <li>Check the status of your requests on the "Requests" page within Overseerr.</li>
+            </ul>
+        </section>
+
+        <section class="server_features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Dual Instances of Plex and Emby for redundancy and personalized libraries.</li>
+                <li>Comprehensive Media Insights through Tautulli.</li>
+                <li>Streamlined Media Requests using Overseerr.</li>
+                <li>Centralized Dashboard for seamless navigation between services.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Applications and URLs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dashboard</td>
+                        <td>Centralized access to server applications.</td>
+                        <td><a href="https://homepage.tardisonline.in" target="_blank">homepage.tardisonline.in</a></td>
+                    </tr>
+                    <tr>
+                        <td>Tautulli</td>
+                        <td>Monitor Plex usage and generate insights.</td>
+                        <td><a href="https://tautulli.tardisonline.in" target="_blank">tautulli.tardisonline.in</a></td>
+                    </tr>
+                    <tr>
+                        <td>Overseerr</td>
+                        <td>Manage media requests effortlessly.</td>
+                        <td><a href="https://overseerr.tardisonline.in" target="_blank">overseerr.tardisonline.in</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>&copy; 2025 TheArchive Wiki</footer>
+</body>
+</html>

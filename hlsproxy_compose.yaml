@@ -1,0 +1,33 @@
+services:
+  hlsproxy:
+    restart: unless-stopped 
+    container_name: hlsproxy 
+    image: ghcr.io/higher08/hls-proxy-docker:master
+    hostname: hlsproxy 
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    networks: 
+      - saltbox
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.hlsproxy-http.entrypoints: web 
+      traefik.http.routers.hlsproxy-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.hlsproxy-http.rule: Host(`hlsproxy.tardisonline.in`) 
+      traefik.http.routers.hlsproxy-http.service: hlsproxy 
+      traefik.http.routers.hlsproxy.entrypoints: websecure 
+      traefik.http.routers.hlsproxy.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.hlsproxy.rule: Host(`hlsproxy.tardisonline.in`) 
+      traefik.http.routers.hlsproxy.service: hlsproxy 
+      traefik.http.routers.hlsproxy.tls.certresolver: cfdns 
+      traefik.http.routers.hlsproxy.tls.options: securetls@file 
+      traefik.http.services.hlsproxy.loadbalancer.server.port: 8085
+    volumes: 
+      - /opt/hlsproxy:/opt/hlsp
+      - /etc/localtime:/etc/localtime:ro
+
+networks: 
+  saltbox:
+    external: true

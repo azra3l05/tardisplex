@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:16
+    volumes:
+        - ./data/postgres:/var/lib/postgresql/data
+    ports:
+        - "5432:5432"
+    restart: unless-stopped
+    environment:
+        - POSTGRES_PASSWORD="Re@pr1802"
+        - POSTGRES_USER="azra3l"
+        - POSTGRES_DB="joplin_db"
+  joplin:
+    restart: unless-stopped 
+    container_name: joplin 
+    image: joplin/server:latest
+    depends_on:
+        - db
+    hostname: joplin 
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DB_CLIENT=pg
+      - POSTGRES_PASSWORD="Re@pr1802"
+      - POSTGRES_USER="azra3l"
+      - POSTGRES_DATABASE="joplin_db"
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+    networks: 
+      - saltbox
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.joplin-http.entrypoints: web 
+      traefik.http.routers.joplin-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.joplin-http.rule: Host(`joplin.tardisonline.in`) 
+      traefik.http.routers.joplin-http.service: joplin 
+      traefik.http.routers.joplin.entrypoints: websecure 
+      traefik.http.routers.joplin.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.joplin.rule: Host(`joplin.tardisonline.in`) 
+      traefik.http.routers.joplin.service: joplin 
+      traefik.http.routers.joplin.tls.certresolver: cfdns 
+      traefik.http.routers.joplin.tls.options: securetls@file 
+      traefik.http.services.joplin.loadbalancer.server.port: 22300 
+    volumes: 
+      - /opt/joplin:/CONFIG
+      - /etc/localtime:/etc/localtime:ro
+
+networks: 
+  saltbox:
+    external: true

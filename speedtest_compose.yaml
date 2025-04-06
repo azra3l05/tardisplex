@@ -1,0 +1,33 @@
+services:
+  myspeed:
+    restart: unless-stopped 
+    container_name: myspeed 
+    image: germannewsmaker/myspeed
+    hostname: myspeed 
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    networks: 
+      - saltbox
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.myspeed-http.entrypoints: web 
+      traefik.http.routers.myspeed-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.myspeed-http.rule: Host(`myspeed.tardisonline.in`) 
+      traefik.http.routers.myspeed-http.service: myspeed 
+      traefik.http.routers.myspeed.entrypoints: websecure 
+      traefik.http.routers.myspeed.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker,authelia@docker 
+      traefik.http.routers.myspeed.rule: Host(`myspeed.tardisonline.in`) 
+      traefik.http.routers.myspeed.service: myspeed 
+      traefik.http.routers.myspeed.tls.certresolver: cfdns 
+      traefik.http.routers.myspeed.tls.options: securetls@file 
+      traefik.http.services.myspeed.loadbalancer.server.port: 5216
+    volumes: 
+      - /opt/myspeed:/config
+      - /etc/localtime:/etc/localtime:ro
+
+networks: 
+  saltbox:
+    external: true
